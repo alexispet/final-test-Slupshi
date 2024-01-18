@@ -17,16 +17,16 @@ services:
   api:
     container_name: api-node
     env_file: .env
-    build:
-      context: .
-      target: api
+    build: .
     environment:
       NODE_ENV: development
     depends_on:
       - db
     image: ghcr.io/alexispet/final-test-slupshi/api:develop
     ports:
-      - 3000:3000 
+      - 3000:3000
+    volumes:
+      - .:/app
   
   adminer:
     container_name: adminer
