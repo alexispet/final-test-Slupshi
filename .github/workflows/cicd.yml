@@ -34,3 +34,11 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+  
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:      
+      - uses: actions/checkout@v4
+      - run: npm install
+      - run: npm test
