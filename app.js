@@ -1,6 +1,6 @@
 import express from 'express';
 import mariadb from 'mariadb';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv'
 
 dotenv.config();
 
@@ -9,10 +9,11 @@ let port = process.env.PORT || 3000;
 
 // Configurations de la base de données
 const pool = mariadb.createPool({
-  host: 'localhost:3036',
-  user: 'toto',
-  password: 'toto',
-  database: 'totoDb',
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'user',
+  port: process.env.DB_PORT || 3306,
+  password: process.env.DB_PASSWORD || 'user',
+  database: process.env.DB_DATABASE || 'database',
   connectionLimit: 5
 });
 

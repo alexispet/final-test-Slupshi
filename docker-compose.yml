@@ -1,4 +1,18 @@
 services: 
+  db:
+    container_name: mariadb
+    image: mariadb
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MARIADB_ROOT_PASSWORD: toto
+      MARIADB_USER: toto
+      MARIADB_PASSWORD: toto
+      MARIADB_DATABASE: totoDb
+    volumes:
+      - ./docker/mariadb/data:/var/lib/mysql/
+
   api:
     container_name: api-node
     build:
@@ -10,21 +24,7 @@ services:
     depends_on:
       - db
     ports:
-      - 3000:3000
-
-  db:
-    container_name: mariadb
-    image: mariadb
-    restart: always
-    ports:
-      - 3036:3036
-    environment:
-      MARIADB_ROOT_PASSWORD: toto
-      MARIADB_USER: toto
-      MARIADB_PASSWORD: toto
-      MARIADB_DATABASE: totoDb
-    volumes:
-      - ./docker/mariadb/data:/var/lib/mysql/
+      - 3000:3000 
   
   adminer:
     container_name: adminer

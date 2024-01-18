@@ -15,11 +15,13 @@ WORKDIR /app
 COPY --from=build /app/package.json .
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/app.js .
-COPY --from=build /app/database/init-db.js ./database
+COPY --from=build /app/.env .
+COPY --from=build /app/database/init-db.js ./database/
 
 EXPOSE 3000
 
 COPY docker/api/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+COPY docker/api/init-db.sh /usr/local/bin/init-db
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT [ "docker-entrypoint" ]
