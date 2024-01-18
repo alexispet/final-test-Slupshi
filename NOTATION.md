@@ -7,7 +7,7 @@
 - [ X ] Vous faites du multi stage build pour alléger le poids final de votre image
 - [ X ] Dans un workflow GitHub, vous lancez les tests
 - [ X ] Dans un workflow GitHub, vous construisez et envoyez l’image docker de l’application sur un registry
-- [ ] Dans un workflow GitHub, vous lancez un audit de sécurité
+- [ X ] Dans un workflow GitHub, vous lancez un audit de sécurité
 - [ X ] Les identifiants de connexion à la base de données sont passés en environnement
 - [ X ] Les identifiants de connexion à la base de données de prod ne sont jamais visibles dans le code versionné
 - [ X ] Vous avez eslint de fonctionnel en local et sur le workflow GitHub
