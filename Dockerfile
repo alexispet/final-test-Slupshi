@@ -15,7 +15,6 @@ WORKDIR /app
 COPY --from=build /app/package.json .
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/app.js .
-COPY --from=build /app/.env .
 COPY --from=build /app/database/init-db.js ./database/
 
 EXPOSE 3000
