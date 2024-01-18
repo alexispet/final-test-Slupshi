@@ -1,7 +1,7 @@
 services: 
   db:
     container_name: mariadb
-    image: mariadb
+    image: mariadb:11.2.2-jammy
     restart: always
     ports:
       - 3307:3307

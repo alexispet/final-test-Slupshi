@@ -1,4 +1,4 @@
-FROM node:20-alpine3.19 AS build
+FROM node:21.5.0-alpine3.19 AS build
 
 COPY . /app/
 
@@ -6,7 +6,7 @@ WORKDIR /app
 
 RUN npm install
 
-FROM node:20-alpine3.19 AS api
+FROM node:21.5.0-alpine3.19 AS api
 
 LABEL org.containers.images.source https://github.com/alexispet/final-test-Slupshi
 
