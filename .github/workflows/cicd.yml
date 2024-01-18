@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-			- run: npm audit --audit-level=high
+      - run: npm audit --audit-level=high
 
   test:
     #needs: [lint]
