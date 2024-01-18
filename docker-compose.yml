@@ -1,23 +1,28 @@
 services: 
   api:
+    container_name: api-node
     build:
       context: .
     environment:
       NODE_ENV: development
-    image: ghcr.io/slupshi/final-test-slupshi-api:develop
+    image: node:20-alpine3.19
     ports:
       - 3000:3000
   db:
+    container_name: mariadb
     image: mariadb
     restart: always
+    ports:
+      - 3036:3036
     environment:
       MARIADB_ROOT_PASSWORD: toto
   
   adminer:
+    container_name: adminer
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 8081:8080
       
 
 
