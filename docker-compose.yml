@@ -1,0 +1,23 @@
+services: 
+  api:
+    build:
+      context: .
+    environment:
+      NODE_ENV: development
+    image: ghcr.io/slupshi/final-test-slupshi-api:develop
+    ports:
+      - 3000:3000
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: toto
+  
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+      
+
+
