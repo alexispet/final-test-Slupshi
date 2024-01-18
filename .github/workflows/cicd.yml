@@ -36,7 +36,8 @@ jobs:
     steps:      
       - uses: actions/checkout@v4
       - run: npm install
-      - run: npm test
+      - run: npm run db:import
+      - run: npm run test
 
   deploy-development:
     runs-on: ubuntu-latest
@@ -45,7 +46,7 @@ jobs:
       HOST: ${{ secrets.SSH_HOST }}
     environment:
       name: development
-      url: $HOST
+      url: http://$HOST:3000
     if: github.ref_name == 'develop'
     permissions:
       contents: read
@@ -71,7 +72,7 @@ jobs:
       HOST: ${{ secrets.SSH_HOST }}
     environment:
       name: production
-      url: $HOST
+      url: http://$HOST:80
     if: github.ref_name == 'main'
     permissions:
       contents: read
