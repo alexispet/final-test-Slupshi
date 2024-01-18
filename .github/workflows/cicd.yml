@@ -38,33 +38,53 @@ jobs:
       - run: npm install
       - run: npm test
 
-  build-and-push-image:
-    needs: [test]
+  deploy-development:
     runs-on: ubuntu-latest
+    needs: [test]
+    environment:
+      name: development
+      url: http://${{ secrets.SSH_HOST }}:3000
+    if: github.ref_name == 'develop'
     permissions:
       contents: read
       packages: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Log in to the Container registry
-        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+      - uses: actions/checkout@v3
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+      - name: Build and push
+        uses: docker/build-push-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/api
-      - name: Build and push Docker image
-        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
-        with:
-          context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ghcr.io/alexispet/final-test-slupshi/api:develop
+
+  deploy-production:
+    runs-on: ubuntu-latest
+    needs: [test]
+    environment:
+      name: production
+      url: http://${{ secrets.SSH_HOST }}:80
+    if: github.ref_name == 'main'
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ghcr.io/alexispet/final-test-slupshi/api:latest
 
   # lighthouse:
   #   runs-on: ubuntu-latest
