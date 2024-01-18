@@ -43,7 +43,7 @@ jobs:
     needs: [test]
     environment:
       name: development
-      url: http://${{ secrets.SSH_HOST }}:3000
+      url: ${{ secrets.SSH_HOST }}:3000
     if: github.ref_name == 'develop'
     permissions:
       contents: read
@@ -67,7 +67,7 @@ jobs:
     needs: [test]
     environment:
       name: production
-      url: http://${{ secrets.SSH_HOST }}:80
+      url: ${{ secrets.SSH_HOST }}:80
     if: github.ref_name == 'main'
     permissions:
       contents: read
