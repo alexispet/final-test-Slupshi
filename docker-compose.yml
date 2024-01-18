@@ -27,6 +27,8 @@ services:
       - 3000:3000
     volumes:
       - .:/app
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
   
   adminer:
     container_name: adminer
