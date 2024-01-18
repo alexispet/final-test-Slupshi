@@ -6,23 +6,24 @@ services:
     ports:
       - 3306:3306
     environment:
-      MARIADB_ROOT_PASSWORD: toto
-      MARIADB_USER: toto
-      MARIADB_PASSWORD: toto
-      MARIADB_DATABASE: totoDb
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_DATABASE: ${DB_DATABASE}
     volumes:
       - ./docker/mariadb/data:/var/lib/mysql/
 
   api:
     container_name: api-node
+    env_file: .env
     build:
       context: .
       target: api
-      dockerfile: Dockerfile
     environment:
       NODE_ENV: development
     depends_on:
       - db
+    image: ghcr.io/alexispet/final-test-slupshi/api:develop
     ports:
       - 3000:3000 
   
