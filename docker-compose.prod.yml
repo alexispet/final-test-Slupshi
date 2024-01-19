@@ -28,7 +28,8 @@ services:
       - db-prod
     image: ghcr.io/alexispet/final-test-slupshi/api:latest
     ports:
-      - 80:80
+      - 80:80      
+      - 443:443
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "com.centurylinklabs.watchtower.scope=prod"
