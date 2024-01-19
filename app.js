@@ -1,24 +1,20 @@
 import express from 'express';
 import mariadb from 'mariadb';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 const app = express();
 let port = process.env.PORT || 3000;
 
 // Configurations de la base de données
 const pool = mariadb.createPool({
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'user',
-  port: process.env.DB_PORT || 3306,
-  password: process.env.DB_PASSWORD || 'user',
-  database: process.env.DB_DATABASE || 'database',
+  host: 'mariadb',
+  user: 'votre_utilisateur',
+  password: 'votre_mot_de_passe',
+  database: 'votre_base_de_donnees',
   connectionLimit: 5
 });
 
 app.get('/', async (req, res) => {
-  res.status(200).json({ message: `Bienvenue sur l\'API de votre application : ${process.env.NODE_ENV} déployée par Watchtower` });
+  res.status(200).json({ message: 'Bienvenue sur l\'API de votre application' });
 });
 
 app.get('/post', async (req, res) => {
@@ -56,9 +52,7 @@ function findAvailablePort() {
 // Lancer le serveur en utilisant le port disponible
 findAvailablePort()
   .then((availablePort) => {
-    port = process.env.NODE_ENV === "production" ?
-      (process.env.PORT_PROD || 80) :
-      (process.env.PORT || 3000);  //availablePort;
+    port = availablePort;
     app.listen(port, () => {
       console.log(`Serveur en cours d'exécution sur le port ${port}`);
     });

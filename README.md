@@ -1,8 +1,8 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/OlYrOqbl)
 # Y Social network API
 
-Production URL: http://slupshi.alpex.ovh:3001 (https://slupshi.alpex.ovh avec Traefik)
-Development URL: http://slupshi.alpex.ovh:3000
+Production URL: http://18.234.174.44:3001 ou http://18.234.174.44:80 (https://18.234.174.44 avec Traefik)
+Development URL: http://18.234.174.44:3000
 
 ## Description
 This is the official API for the Y Social Network. 
