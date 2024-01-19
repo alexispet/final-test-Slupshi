@@ -33,13 +33,6 @@ services:
       - .:/app
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-  
-  adminer:
-    container_name: adminer
-    image: adminer
-    restart: always
-    ports:
-      - 8081:8080  
 
   watchtower:
     image: containrrr/watchtower
