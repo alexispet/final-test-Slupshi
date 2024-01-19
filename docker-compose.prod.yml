@@ -36,6 +36,7 @@ services:
       - "traefik.docker.network=proxy"
       - "traefik.enable=true"
       - "traefik.basic.port=80"
+      - "traefik.http.services.pihole.loadbalancer.server.port=80"
       - "traefik.basic.protocol=http"
       - "traefik.admin.protocol=https"
       - "traefik.admin.port=443"
