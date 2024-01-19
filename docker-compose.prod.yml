@@ -15,25 +15,34 @@ services:
       - ./docker/mariadb/data:/var/lib/mysql/
 
   api:
-    container_name: api-node
-    env_file: .env
-    build:
-      context: .
-      target: api
+    container_name: api-node    
+    build: .
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
+      DB_HOST: ${DB_HOST_PROD}
+      DB_USER: ${DB_USER_PROD}
+      DB_PASSWORD: ${DB_PASSWORD_PROD}
+      DB_DATABASE: ${DB_DATABASE_PROD}
+      DB_PORT: ${DB_PORT_PROD}
     depends_on:
       - db
     image: ghcr.io/alexispet/final-test-slupshi/api:latest
     ports:
-      - 80:80 
-  
-  adminer:
-    container_name: adminer
-    image: adminer
-    restart: always
-    ports:
-      - 8081:8080
+      - 80:80
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  watchtower:
+    container_name: Watchtower 
+    image: containrrr/watchtower
+    command: --interval 30 --label-enable
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_NOTIFICATIONS: shoutrrr
+      WATCHTOWER_NOTIFICATION_URL: "discord://${DISCORD_TOKEN}@${DISCORD_ID}"
+      WATCHTOWER_NOTIFICATION_TEMPLATE: |-
+        {{range .}}{{.Time.Format "12-01-2020 15:04:05"}} ({{.Level}})':' {{.Message}}{{println}}{{end}}
       
 
 

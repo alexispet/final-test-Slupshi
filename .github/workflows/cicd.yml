@@ -115,7 +115,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v10
         with:
           urls: |
-            http://54.92.196.192:3000
+            http://ec2-52-91-226-48.compute-1.amazonaws.com:3000
           uploadArtifacts: true
           temporaryPublicStorage: true
 
@@ -128,6 +128,6 @@ jobs:
         uses: treosh/lighthouse-ci-action@v10
         with:
           urls: |
-            http://54.92.196.192:80
+            http://ec2-52-91-226-48.compute-1.amazonaws.com:80
           uploadArtifacts: true
           temporaryPublicStorage: true

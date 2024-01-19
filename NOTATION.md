@@ -17,7 +17,7 @@
 - [ ] Sur le serveur, vous déployez un environnement de production et un environnement de développement
 - [ ] Dans un workflow GitHub, lighthouse est lancé tous les jours pour auditer les performances de l’application de production
 - [ ] Sur le serveur, l’application de production et de développement sont accessibles en https
-- [ ] Envoyer une notification (email, slack, discord...) quand un environnement est déployé
+- [ X ] Envoyer une notification (email, slack, discord...) quand un environnement est déployé
 - [ ] Vous avez un playbook Ansible qui installe docker sur le serveur.
 
 Bonus :
