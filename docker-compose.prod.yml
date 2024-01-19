@@ -13,8 +13,8 @@ services:
       MYSQL_TCP_PORT: ${DB_PORT_PROD}
     volumes:
       - ./docker/prod/mariadb/data:/var/lib/mysql/
-    networks:
-      - proxy
+    # networks:
+    #   - proxy
 
   api-prod:
     container_name: API-Node
@@ -29,20 +29,22 @@ services:
     depends_on:
       - db-prod
     image: ghcr.io/alexispet/final-test-slupshi/api:latest
-    expose:
-      - 80
-    labels:
-      - "traefik.docker.network=proxy"
-      - "traefik.enable=true"
-      - "traefik.basic.port=80"
-      - "traefik.basic.protocol=http"
-      - "traefik.basic.protocol=https"
-      - "traefik.basic.port=443"
-      - "traefik.basic.frontend.rule=Host:slupshi.alpex.ovh"
-      - "com.centurylinklabs.watchtower.enable=true"
-      - "com.centurylinklabs.watchtower.scope=prod"    
-    networks:
-      - proxy
+    ports:
+      - 80:3000
+    # expose:
+    #   - 80
+    # labels:
+    #   - "traefik.docker.network=proxy"
+    #   - "traefik.enable=true"
+    #   - "traefik.basic.port=80"
+    #   - "traefik.basic.protocol=http"
+    #   - "traefik.basic.protocol=https"
+    #   - "traefik.basic.port=443"
+    #   - "traefik.basic.frontend.rule=Host:slupshi.alpex.ovh"
+    #   - "com.centurylinklabs.watchtower.enable=true"
+    #   - "com.centurylinklabs.watchtower.scope=prod"    
+    # networks:
+    #   - proxy
 
   watchtower-prod:
     container_name: Watchtower
@@ -57,22 +59,22 @@ services:
         {{range .}}{{.Time.Format "12-01-2020 15:04:05"}} ({{.Level}})':' {{.Message}}{{println}}{{end}}    
     labels:
       - "com.centurylinklabs.watchtower.scope=prod"  
-    networks:
-      - proxy
+    # networks:
+    #   - proxy
   
-  traefik:
-    image: traefik:v1.7
-    restart: always
-    ports:
-      - 80:80
-      - 443:443
-    networks:
-      - proxy
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /opt/traefik/traefik.toml:/traefik.toml
-      - /opt/traefik/acme.json:/acme.json
-    container_name: traefik
+  # traefik:
+  #   image: traefik:v1.7
+  #   restart: always
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   networks:
+  #     - proxy
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - /opt/traefik/traefik.toml:/traefik.toml
+  #     - /opt/traefik/acme.json:/acme.json
+  #   container_name: traefik
 
 networks:
   proxy:
