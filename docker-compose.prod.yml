@@ -1,6 +1,6 @@
 services: 
-  db:
-    container_name: mariadb
+  db-prod:
+    container_name: MariaDB
     image: mariadb:11.2.2-jammy
     restart: always
     ports:
@@ -14,11 +14,11 @@ services:
     volumes:
       - ./docker/mariadb/data:/var/lib/mysql/
 
-  api:
-    container_name: api-node    
+  api-prod:
+    container_name: API Node
     build: .
     environment:
-      NODE_ENV: development
+      NODE_ENV: production
       DB_HOST: ${DB_HOST_PROD}
       DB_USER: ${DB_USER_PROD}
       DB_PASSWORD: ${DB_PASSWORD_PROD}
@@ -32,8 +32,8 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
-  watchtower:
-    container_name: Watchtower 
+  watchtower-prod:
+    container_name: Watchtower
     image: containrrr/watchtower
     command: --interval 30 --label-enable
     volumes:
