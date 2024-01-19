@@ -29,8 +29,6 @@ services:
     image: ghcr.io/alexispet/final-test-slupshi/api:develop
     ports:
       - 3000:3000
-    volumes:
-      - .:/app
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
