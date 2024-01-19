@@ -1,7 +1,7 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/OlYrOqbl)
 # Y Social network API
 
-Production URL: https://slupshi.alpex.ovh 
+Production URL: http://slupshi.alpex.ovh:3001 (https://slupshi.alpex.ovh avec Traefik)
 Development URL: http://slupshi.alpex.ovh:3000
 
 ## Description
