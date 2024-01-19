@@ -30,13 +30,13 @@ services:
     depends_on:
       - db-prod
     image: ghcr.io/alexispet/final-test-slupshi/api:latest
-    expose:
-      - 80
+    ports:
+      - 9000:80
     labels:
       - "traefik.docker.network=proxy"
       - "traefik.enable=true"
       - "traefik.basic.port=80"
-      - "traefik.http.services.pihole.loadbalancer.server.port=80"
+      - "traefik.http.services.pihole.loadbalancer.server.port=9000"
       - "traefik.basic.protocol=http"
       - "traefik.admin.protocol=https"
       - "traefik.admin.port=443"
