@@ -106,8 +106,8 @@ jobs:
           push: true
           tags: ghcr.io/alexispet/final-test-slupshi/api:latest
 
-  lighthouse:
-    needs: [build-image-production,build-image-development]
+  lighthouse-dev:
+    needs: [build-image-development]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -116,5 +116,18 @@ jobs:
         with:
           urls: |
             http://54.92.196.192:3000
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+  lighthouse-prod:
+    needs: [build-image-production]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Audit URLs using Lighthouse
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          urls: |
+            http://54.92.196.192:80
           uploadArtifacts: true
           temporaryPublicStorage: true
