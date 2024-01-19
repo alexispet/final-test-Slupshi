@@ -15,7 +15,6 @@ services:
       - ./docker/prod/mariadb/data:/var/lib/mysql/
     networks:
       - proxy
-      - default
 
   api-prod:
     container_name: API-Node
@@ -44,7 +43,6 @@ services:
       - "com.centurylinklabs.watchtower.scope=prod"    
     networks:
       - proxy
-      - default
 
   watchtower-prod:
     container_name: Watchtower
@@ -61,7 +59,6 @@ services:
       - "com.centurylinklabs.watchtower.scope=prod"  
     networks:
       - proxy
-      - default
   
   traefik:
     image: traefik:v1.7
