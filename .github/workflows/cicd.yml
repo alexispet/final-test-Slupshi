@@ -107,6 +107,7 @@ jobs:
           tags: ghcr.io/alexispet/final-test-slupshi/api:latest
 
   lighthouse:
+    needs: [build-image-production,build-image-development]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -114,6 +115,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v10
         with:
           urls: |
-            http://${{ secrets.SSH_HOST }}
+            http://54.92.196.192:3000
+            #http://54.92.196.192:80
           uploadArtifacts: true
           temporaryPublicStorage: true
