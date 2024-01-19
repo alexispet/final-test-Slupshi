@@ -116,6 +116,5 @@ jobs:
         with:
           urls: |
             http://54.92.196.192:3000
-            #http://54.92.196.192:80
           uploadArtifacts: true
           temporaryPublicStorage: true
