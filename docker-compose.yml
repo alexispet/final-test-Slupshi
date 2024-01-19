@@ -39,10 +39,10 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
+      WATCHTOWER_NOTIFICATIONS: shoutrrr
       WATCHTOWER_NOTIFICATION_URL: "discord://${DISCORD_TOKEN}@${DISCORD_ID}"
       WATCHTOWER_NOTIFICATION_TEMPLATE: |-
         {{range .}}{{.Time.Format "12-01-2020 15:04:05"}} ({{.Level}})':' {{.Message}}{{println}}{{end}}
-      WATCHTOWER_NOTIFICATIONS: shoutrrr
       
 
 
