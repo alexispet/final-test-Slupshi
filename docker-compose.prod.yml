@@ -30,7 +30,7 @@ services:
       - db-prod
     image: ghcr.io/alexispet/final-test-slupshi/api:latest
     ports:
-      - 80:3000
+      - 3000:80
     # expose:
     #   - 80
     # labels:
@@ -61,6 +61,8 @@ services:
       - "com.centurylinklabs.watchtower.scope=prod"  
     # networks:
     #   - proxy
+
+  # Problème de bad gateway avec Traefik
   
   # traefik:
   #   image: traefik:v1.7
