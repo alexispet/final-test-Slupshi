@@ -1,8 +1,8 @@
+---
 name: learn-github-actions
 run-name: ${{ github.actor }} is running CI/CD
 on: [push]
 
-# Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
@@ -39,7 +39,7 @@ jobs:
       - run: npm run db:import
       - run: npm run test
 
-  deploy-development:
+  build-image-development:
     runs-on: ubuntu-latest
     needs: [test]
     env:
@@ -66,7 +66,7 @@ jobs:
           push: true
           tags: ghcr.io/alexispet/final-test-slupshi/api:develop
 
-  deploy-production:
+  build-image-production:
     runs-on: ubuntu-latest
     needs: [test]
     env:
