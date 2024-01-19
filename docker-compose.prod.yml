@@ -12,7 +12,7 @@ services:
       MARIADB_DATABASE: ${DB_DATABASE_PROD}
       MYSQL_TCP_PORT: ${DB_PORT_PROD}
     volumes:
-      - ./docker/mariadb/data:/var/lib/mysql/
+      - ./docker/prod/mariadb/data:/var/lib/mysql/
 
   api-prod:
     container_name: API-Node
