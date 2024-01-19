@@ -15,7 +15,7 @@ services:
       - ./docker/mariadb/data:/var/lib/mysql/
 
   api-prod:
-    container_name: API Node
+    container_name: API-Node
     build: .
     environment:
       NODE_ENV: production
