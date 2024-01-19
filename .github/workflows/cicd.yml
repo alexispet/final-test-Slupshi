@@ -33,24 +33,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: adambirds/docker-compose-action@v1.3.0      
+      - uses: adambirds/docker-compose-action@v1.3.0   
+      - name: Create env file   
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
-        env:
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_DATABASE: ${{ secrets.DB_NAME }}
-          DB_PORT: 3306
-          NODE_ENV: development
-        with:
-          compose-file: "./docker-compose.yml"
-          down-flags: "--volumes"
-          services: |
-            api
-            db
-          test-container: api
-          test-command: "npm run test"
+      env:
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_USER: ${{ secrets.DB_USER }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_DATABASE: ${{ secrets.DB_NAME }}
+        DB_PORT: 3306
+        NODE_ENV: development
+      with:
+        compose-file: "./docker-compose.yml"
+        down-flags: "--volumes"
+        services: |
+          api
+          db
+        test-container: api
+        test-command: "npm run test"
 
   build-image-development:
     runs-on: ubuntu-latest
