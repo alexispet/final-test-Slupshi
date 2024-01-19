@@ -30,8 +30,8 @@ services:
     depends_on:
       - db-prod
     image: ghcr.io/alexispet/final-test-slupshi/api:latest
-    ports:
-      - 80:80
+    expose:
+      - 80
     labels:
       - "traefik.docker.network=proxy"
       - "traefik.enable=true"
