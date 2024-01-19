@@ -63,7 +63,7 @@ services:
       - default
   
   traefik:
-    image: traefik:latest
+    image: traefik:v1.7
     restart: always
     ports:
       - 80:80
