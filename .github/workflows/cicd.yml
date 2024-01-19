@@ -106,14 +106,14 @@ jobs:
           push: true
           tags: ghcr.io/alexispet/final-test-slupshi/api:latest
 
-  # lighthouse:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Audit URLs using Lighthouse
-  #       uses: treosh/lighthouse-ci-action@v10
-  #       with:
-  #         urls: |
-  #           https://ec2-3-89-92-48.compute-1.amazonaws.com
-  #         uploadArtifacts: true
-  #         temporaryPublicStorage: true
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Audit URLs using Lighthouse
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          urls: |
+            http://${{ secrets.SSH_HOST }}
+          uploadArtifacts: true
+          temporaryPublicStorage: true
