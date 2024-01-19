@@ -113,7 +113,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v10
         with:
           urls: |
-            http://ec2-52-91-226-48.compute-1.amazonaws.com:3000
+            https://slupshi.alpex.ovh/:3000
           uploadArtifacts: true
           temporaryPublicStorage: true
 
@@ -126,6 +126,6 @@ jobs:
         uses: treosh/lighthouse-ci-action@v10
         with:
           urls: |
-            http://ec2-52-91-226-48.compute-1.amazonaws.com:80
+            https://slupshi.alpex.ovh/:80
           uploadArtifacts: true
           temporaryPublicStorage: true
