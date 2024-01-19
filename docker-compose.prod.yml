@@ -13,6 +13,9 @@ services:
       MYSQL_TCP_PORT: ${DB_PORT_PROD}
     volumes:
       - ./docker/prod/mariadb/data:/var/lib/mysql/
+    networks:
+      - proxy
+      - default
 
   api-prod:
     container_name: API-Node
@@ -31,8 +34,17 @@ services:
       - 80:80      
       - 443:443
     labels:
+      - "traefik.docker.network=proxy"
+      - "traefik.enable=true"
+      - "traefik.basic.port=80"
+      - "traefik.basic.protocol=http"
+      - "traefik.admin.protocol=https"
+      - "traefik.admin.port=443"
       - "com.centurylinklabs.watchtower.enable=true"
-      - "com.centurylinklabs.watchtower.scope=prod"
+      - "com.centurylinklabs.watchtower.scope=prod"    
+    networks:
+      - proxy
+      - default
 
   watchtower-prod:
     container_name: Watchtower
@@ -46,7 +58,28 @@ services:
       WATCHTOWER_NOTIFICATION_TEMPLATE: |-
         {{range .}}{{.Time.Format "12-01-2020 15:04:05"}} ({{.Level}})':' {{.Message}}{{println}}{{end}}    
     labels:
-      - "com.centurylinklabs.watchtower.scope=prod"
+      - "com.centurylinklabs.watchtower.scope=prod"  
+    networks:
+      - proxy
+      - default
+  
+  traefik:
+    image: traefik:latest
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/traefik/traefik.toml:/traefik.toml
+      - /opt/traefik/acme.json:/acme.json
+    container_name: traefik
+
+networks:
+  proxy:
+    external: true
       
 
 
