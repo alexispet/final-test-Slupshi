@@ -27,9 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: npm audit --audit-level=high
-
-  
+      - run: npm audit --audit-level=high  
 
   test:
     runs-on: ubuntu-latest    
@@ -44,12 +42,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: adambirds/docker-compose-action@v1.3.0
         with:
-          compose-file: "./docker-compose.yml"
+          compose-file: "./docker-compose.dev.yml"
           down-flags: "--volumes"
           services: |
-            api
-            db
-          test-container: api
+            api-dev
+            db-dev
+          test-container: api-dev
           test-command: "npm run test"
 
   build-image-development:
