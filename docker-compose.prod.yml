@@ -31,18 +31,21 @@ services:
       - 80:80
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.scope=prod"
 
   watchtower-prod:
     container_name: Watchtower
     image: containrrr/watchtower
-    command: --interval 30 --label-enable
+    command: --interval 30 --label-enable --scope prod
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       WATCHTOWER_NOTIFICATIONS: shoutrrr
       WATCHTOWER_NOTIFICATION_URL: "discord://${DISCORD_TOKEN}@${DISCORD_ID}"
       WATCHTOWER_NOTIFICATION_TEMPLATE: |-
-        {{range .}}{{.Time.Format "12-01-2020 15:04:05"}} ({{.Level}})':' {{.Message}}{{println}}{{end}}
+        {{range .}}{{.Time.Format "12-01-2020 15:04:05"}} ({{.Level}})':' {{.Message}}{{println}}{{end}}    
+    labels:
+      - "com.centurylinklabs.watchtower.scope=prod"
       
 
 

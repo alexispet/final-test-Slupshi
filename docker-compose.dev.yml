@@ -31,11 +31,12 @@ services:
       - 3000:3000
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.scope=dev"
 
   watchtower-dev:
     container_name: DEV-Watchtower
     image: containrrr/watchtower
-    command: --interval 30 --label-enable
+    command: --interval 30 --label-enable --scope dev
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
@@ -43,6 +44,8 @@ services:
       WATCHTOWER_NOTIFICATION_URL: "discord://${DISCORD_TOKEN}@${DISCORD_ID}"
       WATCHTOWER_NOTIFICATION_TEMPLATE: |-
         {{range .}}{{.Time.Format "12-01-2020 15:04:05"}} ({{.Level}})':' {{.Message}}{{println}}{{end}}
+    labels:
+      - "com.centurylinklabs.watchtower.scope=dev"
       
 
 

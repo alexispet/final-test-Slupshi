@@ -19,6 +19,7 @@ COPY --from=build /app/database/init-db.js ./database/
 COPY --from=build /app/tests/ ./tests
 
 EXPOSE 3000
+EXPOSE 80
 
 COPY docker/api/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 COPY docker/api/init-db.sh /usr/local/bin/init-db
