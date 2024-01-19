@@ -46,7 +46,8 @@ jobs:
       HOST: ${{ secrets.SSH_HOST }}
     environment:
       name: development
-      url: "http://$HOST:3000"
+      url: "http://ec2-54-92-196-192.compute-1.amazonaws.com:3000"
+      #url: "http://$HOST:3000"
     if: github.ref_name == 'develop'
     permissions:
       contents: read
@@ -72,7 +73,8 @@ jobs:
       HOST: ${{ secrets.SSH_HOST }}
     environment:
       name: production
-      url: "http://$HOST:80"
+      url: "http://ec2-54-92-196-192.compute-1.amazonaws.com:80"
+      #url: "http://$HOST:80"
     if: github.ref_name == 'main'
     permissions:
       contents: read
