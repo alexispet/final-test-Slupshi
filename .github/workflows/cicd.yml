@@ -30,14 +30,21 @@ jobs:
       - run: npm audit --audit-level=high
 
   test:
-    #needs: [lint]
-    name: test
     runs-on: ubuntu-latest
-    steps:      
+    steps:
       - uses: actions/checkout@v4
-      - run: npm install
-      - run: npm run db:import
-      - run: npm run test
+      - uses: adambirds/docker-compose-action@v1.3.0
+        env_file: .env
+        env:
+          NODE_ENV: development
+        with:
+          compose-file: "./docker-compose.yml"
+          down-flags: "--volumes"
+          services: |
+            api
+            db
+          test-container: api
+          test-command: "npm run test"
 
   build-image-development:
     runs-on: ubuntu-latest
