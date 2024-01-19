@@ -39,7 +39,7 @@ services:
       - "traefik.basic.protocol=http"
       - "traefik.admin.protocol=https"
       - "traefik.admin.port=443"
-      - "traefik.frontend.rule=Host:ec2-52-91-226-48.compute-1.amazonaws.com"
+      - "traefik.frontend.rule=Host:slupshi.alpex.ovh"
       - "com.centurylinklabs.watchtower.enable=true"
       - "com.centurylinklabs.watchtower.scope=prod"    
     networks:
