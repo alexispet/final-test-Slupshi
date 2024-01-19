@@ -25,7 +25,7 @@ services:
       DB_DATABASE: ${DB_DATABASE_PROD}
       DB_PORT: ${DB_PORT_PROD}
     depends_on:
-      - db
+      - db-prod
     image: ghcr.io/alexispet/final-test-slupshi/api:latest
     ports:
       - 80:80
