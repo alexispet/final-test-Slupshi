@@ -33,6 +33,7 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
 
   watchtower:
+  container_name: Watchtower 
     image: containrrr/watchtower
     command: --interval 30 --label-enable
     volumes:
