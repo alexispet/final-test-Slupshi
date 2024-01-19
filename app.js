@@ -57,8 +57,8 @@ function findAvailablePort() {
 findAvailablePort()
   .then((availablePort) => {
     port = process.env.NODE_ENV === "production" ?
-      process.env.PORT_PROD :
-      process.env.PORT || 3000;  //availablePort;
+      (process.env.PORT_PROD || 80) :
+      (process.env.PORT || 3000);  //availablePort;
     app.listen(port, () => {
       console.log(`Serveur en cours d'exécution sur le port ${port}`);
     });
