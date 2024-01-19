@@ -4,7 +4,7 @@ services:
     image: mariadb:11.2.2-jammy
     restart: always
     ports:
-      - 3307:3307
+      - 3306:3306
     environment:
       MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
       MARIADB_USER: ${DB_USER}
@@ -16,33 +16,15 @@ services:
 
   api:
     container_name: api-node    
-    build: .
-    environment:
-      NODE_ENV: development
-      DB_HOST: ${DB_HOST}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_DATABASE: ${DB_DATABASE}
-      DB_PORT: ${DB_PORT}
+    build: 
+      context: .
+      target: api
+    env_file: .env
     depends_on:
       - db
     image: ghcr.io/alexispet/final-test-slupshi/api:develop
     ports:
       - 3000:3000
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-
-  watchtower:
-    container_name: Watchtower 
-    image: containrrr/watchtower
-    command: --interval 30 --label-enable
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      WATCHTOWER_NOTIFICATIONS: shoutrrr
-      WATCHTOWER_NOTIFICATION_URL: "discord://${DISCORD_TOKEN}@${DISCORD_ID}"
-      WATCHTOWER_NOTIFICATION_TEMPLATE: |-
-        {{range .}}{{.Time.Format "12-01-2020 15:04:05"}} ({{.Level}})':' {{.Message}}{{println}}{{end}}
       
 
 
